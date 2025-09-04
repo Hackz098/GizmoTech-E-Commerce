@@ -1,0 +1,49 @@
+Please extend my Next.js + Tailwind e-commerce project “GizmoTech” with a shopping cart feature.
+
+Requirements:
+
+Cart State Management
+
+Use React Context or a simple global state (e.g., React Context API or Zustand) to manage the cart.
+
+When a user clicks “Add to Cart” on any product card, the product should be added to the cart.
+
+If the same product is added again, increase the quantity instead of duplicating the item.
+
+Cart Page
+
+Create a new page at /cart.
+
+Display all products added to the cart in a list format. Each item should show:
+
+Product image
+
+Product name
+
+Price
+
+Quantity (with + / - buttons to adjust)
+
+Remove button (to delete item from cart).
+
+Show a Cart Summary at the bottom with:
+
+Total items
+
+Total price
+
+A placeholder “Checkout” button (no payment integration yet).
+
+Styling
+
+Use Tailwind CSS with the GizmoTech theme (black background, white text, neon blue highlights).
+
+Cart items should be displayed in a clean card/list style.
+
+Checkout button should be styled with neon blue and hover effects.
+
+Navigation
+
+Add a Cart link in the navbar that shows the number of items in the cart (e.g., 🛒 3).
+
+Clicking the cart link should take the user to /cart.
