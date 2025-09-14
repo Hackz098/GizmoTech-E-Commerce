@@ -56,113 +56,133 @@ export default function Admin() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="text-center mb-8">
-        <h1 className="section-title">Admin Panel</h1>
-        <p className="section-subtitle">Add new products to your store</p>
-      </div>
-
-      <div className="card p-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-2">
-              Product Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 bg-bg-card border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="Enter product name"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-text-primary mb-2">
-              Description
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-              rows={4}
-              className="w-full px-3 py-2 bg-bg-card border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="Enter product description"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="price" className="block text-sm font-medium text-text-primary mb-2">
-              Price ($)
-            </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              required
-              step="0.01"
-              min="0"
-              className="w-full px-3 py-2 bg-bg-card border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="0.00"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-text-primary mb-2">
-              Image URL
-            </label>
-            <input
-              type="url"
-              id="imageUrl"
-              name="imageUrl"
-              value={formData.imageUrl}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 bg-bg-card border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
-
-          {message && (
-            <div className={`p-4 rounded-lg ${
-              message.includes('Error') 
-                ? 'bg-red-900/20 border border-red-700 text-red-300' 
-                : 'bg-green-900/20 border border-green-700 text-green-300'
-            }`}>
-              {message}
+    <div className="min-h-screen bg-gray-50">
+      <div className="container py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-text-primary">Admin Panel</h1>
+              <p className="text-text-secondary mt-2">Manage your store and add new products</p>
             </div>
-          )}
-
-          <div className="flex space-x-4">
             <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={async () => {
+                try {
+                  await fetch('/api/admin/logout', { method: 'POST' });
+                  router.push('/admin/login');
+                } catch (error) {
+                  console.error('Logout failed:', error);
+                }
+              }}
+              className="btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
             >
-              {loading ? 'Adding Product...' : 'Add Product'}
-            </button>
-            <button
-              type="button"
-              onClick={() => router.push('/')}
-              className="px-6 py-2 border border-border text-text-secondary rounded-lg hover:border-primary hover:text-primary transition-colors"
-            >
-              Cancel
+              Logout
             </button>
           </div>
-        </form>
-      </div>
 
-      <div className="mt-8 text-center">
-        <a href="/" className="text-primary hover:text-primary-hover transition-colors">
-          ← Back to Store
-        </a>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+            <h2 className="text-xl font-semibold text-text-primary mb-6">Add New Product</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-2">
+                  Product Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter product name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="description" className="block text-sm font-medium text-text-primary mb-2">
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter product description"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="price" className="block text-sm font-medium text-text-primary mb-2">
+                  Price ($)
+                </label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  required
+                  step="0.01"
+                  min="0"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="0.00"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="imageUrl" className="block text-sm font-medium text-text-primary mb-2">
+                  Image URL
+                </label>
+                <input
+                  type="url"
+                  id="imageUrl"
+                  name="imageUrl"
+                  value={formData.imageUrl}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+
+              {message && (
+                <div className={`p-4 rounded-lg ${
+                  message.includes('Error') 
+                    ? 'bg-red-50 border border-red-200 text-red-700' 
+                    : 'bg-green-50 border border-green-200 text-green-700'
+                }`}>
+                  {message}
+                </div>
+              )}
+
+              <div className="flex space-x-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? 'Adding Product...' : 'Add Product'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push('/')}
+                  className="btn-outline flex-1"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="mt-8 text-center">
+            <a href="/" className="text-primary hover:text-primary-hover transition-colors">
+              ← Back to Store
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   )
