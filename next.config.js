@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
+  // Enable static exports for deployment
+  output: 'standalone',
+  // Optimize images for production
+  images: {
+    unoptimized: true,
   },
 }
 
