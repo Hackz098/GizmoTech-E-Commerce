@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
-import { verify } from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-default-secret';
 
@@ -28,16 +27,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin/login', request.url));
   }
 
-  try {
-    // Verify JWT token
-    const decoded = verify(token, JWT_SECRET);
-    console.log('✅ Token verified successfully:', decoded);
-    return NextResponse.next();
-  } catch (error) {
-    console.log('❌ Token verification failed:', error);
-    // Invalid token
-    return NextResponse.redirect(new URL('/admin/login', request.url));
-  }
+  // Perform a minimal check in Edge: ensure token exists; defer full verification to server routes
+  return NextResponse.next();
 }
 
 export const config = {

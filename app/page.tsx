@@ -106,7 +106,7 @@ export default function Home() {
                 <button className="btn-primary bg-white text-primary hover:bg-gray-100">
                   Shop Now
                 </button>
-                <button className="btn-secondary border-white text-white hover:bg-white hover:text-primary">
+                <button className="btn-secondary border-white hover:bg-white hover:text-primary">
                   View Categories
                 </button>
               </div>
@@ -304,7 +304,7 @@ export default function Home() {
       {/* Newsletter Section */}
       <section className="py-16 bg-primary text-white">
         <div className="container text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Stay Updated</h2>
           <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
             Subscribe to our newsletter and be the first to know about new products, 
             exclusive deals, and special offers.

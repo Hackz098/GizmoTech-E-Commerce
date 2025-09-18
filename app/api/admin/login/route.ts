@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+export const runtime = 'nodejs'
 import { PrismaClient } from '@prisma/client';
 import { sign } from 'jsonwebtoken';
 import { compare } from 'bcrypt';
